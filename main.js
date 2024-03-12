@@ -9,10 +9,12 @@ let category = document.querySelector("#category");
 let submit = document.querySelector("#submit");
 let search = document.querySelector("#search");
 let deleteAll = document.querySelector("#deleteAll");
-
+let mood = "create";
+let index;
+let searchMood = "title";
 
 let allInputs = Array.from(document.querySelectorAll(".price input"));
-
+let tableBody = document.querySelector(".table-body");
 
 function scrollToTop() {
   window.scrollTo({
@@ -42,6 +44,28 @@ function getTotal() {
 // Initialize data variable by checking localStorage
 let data = localStorage.productData ? JSON.parse(localStorage.productData) : [];
 // handle button delete all
+function deleteAllDisplay() {
+  if (data.length > 0) {
+    deleteAll.style.display = "block";
+    deleteAll.innerHTML = `Delete All (${data.length})`;
+    document.querySelector(".table-handle").style.display = "block";
+  } else {
+    deleteAll.style.display = "none";
+    document.querySelector(".table-handle").style.display = "none";
+  }
+  title.focus();
+}
+function deleteData() {
+  const isConfirmed = confirm("Are you sure you want to delete all items?");
+  if (isConfirmed) {
+    localStorage.removeItem("productData");
+    data = [];
+    tableBody.innerHTML = "";
+    deleteAllDisplay();
+  }
+  title.focus();
+  scrollToTop();
+}
 
 
 // Handle click event on submit button
