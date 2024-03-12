@@ -67,6 +67,57 @@ function deleteData() {
   scrollToTop();
 }
 
+// handle update product function
+function updateFun(i) {
+  let ele = data[i];
+  title.value = ele.title;
+  price.value = ele.price;
+  ads.value = ele.ads;
+  taxes.value = ele.taxes;
+  discount.value = ele.discount;
+  getTotal();
+  count.style.display = "none";
+  category.value = ele.category;
+
+  submit.innerHTML = "Update";
+  mood = "update";
+  index = i;
+  title.focus();
+  scrollToTop();
+}
+// handle delete product function
+function deleteFun(i) {
+  const isConfirmed = confirm("Are you sure you want to delete this item?");
+  if (isConfirmed) {
+    data.splice(i, 1);
+    localStorage.setItem("productData", JSON.stringify(data));
+    updateTable();
+    deleteAllDisplay();
+    scrollToTop();
+  }
+  title.focus();
+}
+
+// Function to update the table with the latest data
+function updateTable() {
+  tableBody.innerHTML = ""; // Clear the table body before adding new data
+  let newData = data.filter((ele) => ele !== null);
+  newData.forEach((ele, i) => {
+    let newTable = `<tr>
+                            <td>${i + 1}</td>
+                            <td>${ele.title}</td>
+                            <td>${ele.price}</td>
+                            <td>${ele.taxes}</td>
+                            <td>${ele.ads}</td>
+                            <td>${ele.discount}</td>
+                            <td>${ele.total}</td>
+                            <td>${ele.category}</td>
+                            <td><button id="update${i}" onclick="updateFun(${i})">Update</button></td>
+                            <td><button id="delete${i}" onclick="deleteFun(${i})">Delete</button></td>
+                        </tr>`;
+    tableBody.innerHTML += newTable;
+  });
+}
 
 // Handle click event on submit button
 submit.onclick = () => {
