@@ -164,7 +164,45 @@ submit.onclick = () => {
   scrollToTop();
 };
 
+function getSearchMood(e) {
+  search.value = "";
+  updateTable();
+  if (e.id === "searchTitle") {
+    searchMood = "title";
+    search.placeholder = "Search By Title";
+  } else if (e.id === "searchCategory") {
+    searchMood = "category";
+    search.placeholder = "Search By Category";
+  }
+  search.focus();
+}
+// Vary Vary Vary Important (searching process)
+function searchData(v) {
+  tableBody.innerHTML = "";
 
+  for (let i = 0; i < data.length; i++) {
+    let ele = data[i];
+    if (
+      ele[searchMood].includes(v.toUpperCase()) ||
+      ele[searchMood].includes(v.toLowerCase())
+    ) {
+      let newTable = `<tr>
+                            <td>${i + 1}</td>
+                            <td>${ele.title}</td>
+                            <td>${ele.price}</td>
+                            <td>${ele.taxes}</td>
+                            <td>${ele.ads}</td>
+                            <td>${ele.discount}</td>
+                            <td>${ele.total}</td>
+                            <td>${ele.category}</td>
+                            <td><button id="update${i}" onclick="updateFun(${i})">Update</button></td>
+                            <td><button id="delete${i}" onclick="deleteFun(${i})">Delete</button></td>
+                        </tr>`;
+
+      tableBody.innerHTML += newTable;
+    }
+  }
+}
 
 window.onload = () => {
   updateTable();
