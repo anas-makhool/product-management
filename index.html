@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Commodity Management System</title>
+  </head>
+  <body>
+    <div class="crud">
+      <!-- Start Head -->
+      <div class="head">
+        <h2>crud</h2>
+        <p>product management system</p>
+      </div>
+      <!-- End Head -->
+
+      <!-- Start Inputs -->
+      <div class="inputs">
+        <input type="text" placeholder="title" id="title" />
+        <div class="price">
+          <input
+            onInput="getTotal()"
+            type="number"
+            id="price"
+            placeholder="price" />
+          <input
+            onInput="getTotal()"
+            type="number"
+            id="taxes"
+            placeholder="taxes" />
+          <input
+            onInput="getTotal()"
+            type="number"
+            id="ads"
+            placeholder="ads" />
+          <input
+            onInput="getTotal()"
+            type="number"
+            id="discount"
+            placeholder="discount" />
+          <small id="total"><span>Total: </span><spa></spa></small>
+        </div>
+        <input type="number" placeholder="count" id="count" />
+        <input type="text" placeholder="category" id="category" />
+        <button id="submit">Create</button>
+      </div>
+      <!-- End Inputs -->
+
+      <!-- Start Outputs -->
+      <div class="outputs">
+        <div class="searchBlock">
+          <input type="text" id="search" placeholder="search" oninput="searchData(this.value)"/>
+          <div class="btn-search">
+            <button id="searchTitle" title="Search By Title" onclick="getSearchMood(this)">
+              Search By Title
+            </button>
+            <button id="searchCategory" title="Search By Category"  onclick="getSearchMood(this)">
+              Search By Category
+            </button>
+          </div>
+        </div>
+        <button id="deleteAll" onclick="deleteData()">Delete All</button>
+        <div class="table-handle">
+          <table>
+            <tr class="table-head">
+              <th>ID</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Taxes</th>
+              <th>Ads</th>
+              <th>Discount</th>
+              <th>Total</th>
+              <th>Category</th>
+              <th>Update</th>
+              <th>Delete</th>
+            </tr>
+            <tbody class="table-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- End Outputs -->
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

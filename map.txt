@@ -1,0 +1,17 @@
+HTML :
+the project divide to three parts
+1- head : the header 
+2- inputs : like title , price ...etc
+3- outputs : the final result with search input
+
+JS:
+// get total (fun)
+// create product (fun)
+// save localStorage
+// clear inputs
+// read (fun)
+// count (looping)
+// deleting (fun)
+// updating (fun)
+// searching (fun)
+// clean data 
