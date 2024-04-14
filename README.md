@@ -34,3 +34,10 @@ This project is a simple CRUDs (Create, Read, Update, Delete,Search) application
 ## Notes
 - Ensure that your browser supports `localStorage` for data persistence.
 - The application may not be suitable for large-scale data management due to its reliance on browser storage.
+
+  ### Credits
+  
+This Commodity Management System is created by [anas-makhool](https://github.com/anas-makhool).
+
+## License 
+[MIT Liscense](LICENSE)
