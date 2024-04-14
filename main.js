@@ -9,6 +9,7 @@ let category = document.querySelector("#category");
 let submit = document.querySelector("#submit");
 let search = document.querySelector("#search");
 let deleteAll = document.querySelector("#deleteAll");
+let checkInput = document.querySelector("#check");
 let mood = "create";
 let index;
 let searchMood = "title";
@@ -16,6 +17,28 @@ let searchMood = "title";
 let allInputs = Array.from(document.querySelectorAll(".price input"));
 let tableBody = document.querySelector(".table-body");
 
+
+
+checkInput.onclick = (e) => {
+
+  if (e.target.checked) {
+    document.body.classList.add("body-theme");
+    document.querySelector(".table-handle").classList.add("check");
+    document.querySelector("input:not(#check)").classList.add("check");
+    document
+      .querySelectorAll("input:not(#check)")
+      .forEach((ele) => ele.classList.add("check"));
+  } else {
+    document.body.classList.remove("body-theme");
+    document.querySelector(".table-handle").classList.remove("check");
+    document.querySelector("input:not(#check)").classList.remove("check");
+    document
+      .querySelectorAll("input:not(#check)")
+      .forEach((ele) => ele.classList.remove("check"));
+  }
+};
+
+// Function to scroll to the top of the page smoothly
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -23,11 +46,13 @@ function scrollToTop() {
   });
 }
 
+// Function to reset the total display area
 function resetTotal() {
   total.lastElementChild.innerText = "";
   total.style.background = "#a00d02";
 }
 
+// Function to calculate and display the total amount
 function getTotal() {
   if (price.value === "") return;
   let result = +price.value + +taxes.value + +ads.value - +discount.value;
@@ -41,8 +66,15 @@ function getTotal() {
   }
 }
 
-// Initialize data variable by checking localStorage
-let data = localStorage.productData ? JSON.parse(localStorage.productData) : [];
+let data;
+
+// Error Handling
+try {
+  data = localStorage.productData ? JSON.parse(localStorage.productData) : [];
+} catch (error) {
+  console.error("Error parsing localStorage data:", error);
+  data = [];
+}
 // handle button delete all
 function deleteAllDisplay() {
   if (data.length > 0) {
@@ -146,7 +178,7 @@ submit.onclick = () => {
     data[index] = newPro;
     // With the index, the item is updated in its spatial order
     // reset the data
-    mood === "create";
+    mood = "create";
     count.style.display = "block";
     submit.innerHTML = "Create";
   }
@@ -164,6 +196,7 @@ submit.onclick = () => {
   scrollToTop();
 };
 
+// search handling with mood , category or title
 function getSearchMood(e) {
   search.value = "";
   updateTable();
@@ -176,7 +209,8 @@ function getSearchMood(e) {
   }
   search.focus();
 }
-// Vary Vary Vary Important (searching process)
+
+// Searching
 function searchData(v) {
   tableBody.innerHTML = "";
 
@@ -209,3 +243,5 @@ window.onload = () => {
   deleteAllDisplay();
   title.focus();
 };
+
+// fix issus with mood
