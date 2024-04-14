@@ -9,6 +9,7 @@ This project is a simple CRUDs (Create, Read, Update, Delete,Search) application
 - Delete individual products or all products.
 - Search products by title or category.
 - Responsive design.
+- Background and color theme toggle
 
 ## Technologies Used
 - HTML
