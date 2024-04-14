@@ -17,18 +17,19 @@ let searchMood = "title";
 let allInputs = Array.from(document.querySelectorAll(".price input"));
 let tableBody = document.querySelector(".table-body");
 
+function applyTheme() {
+  const isChecked = localStorage.getItem("check") === "true";
 
-
-checkInput.onclick = (e) => {
-
-  if (e.target.checked) {
+  if (isChecked) {
+    checkInput.checked = true
     document.body.classList.add("body-theme");
     document.querySelector(".table-handle").classList.add("check");
     document.querySelector("input:not(#check)").classList.add("check");
     document
-      .querySelectorAll("input:not(#check)")
-      .forEach((ele) => ele.classList.add("check"));
+    .querySelectorAll("input:not(#check)")
+    .forEach((ele) => ele.classList.add("check"));
   } else {
+    checkInput.checked = false
     document.body.classList.remove("body-theme");
     document.querySelector(".table-handle").classList.remove("check");
     document.querySelector("input:not(#check)").classList.remove("check");
@@ -36,6 +37,12 @@ checkInput.onclick = (e) => {
       .querySelectorAll("input:not(#check)")
       .forEach((ele) => ele.classList.remove("check"));
   }
+}
+
+checkInput.onclick = (e) => {
+  localStorage.setItem("check", e.target.checked);
+  applyTheme();
+
 };
 
 // Function to scroll to the top of the page smoothly
@@ -242,6 +249,7 @@ window.onload = () => {
   updateTable();
   deleteAllDisplay();
   title.focus();
+  applyTheme();
 };
 
 // fix issus with mood
